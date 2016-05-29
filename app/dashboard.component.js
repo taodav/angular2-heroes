@@ -9,17 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var hero_service_1 = require('./hero.service');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var DashboardComponent = (function () {
-    function DashboardComponent() {
+    function DashboardComponent(heroService, router) {
+        this.heroService = heroService;
+        this.router = router;
     }
+    DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.heroService.getHeroes().then(function (heroes) { return _this.heroes = heroes.slice(1, 5); });
+    };
     DashboardComponent.prototype.gotoDetail = function (hero) {
+        var link = ['HeroDetail', { id: hero.id }];
+        this.router.navigate(link);
     };
     DashboardComponent = __decorate([
         core_1.Component({
             selector: 'my-dashboard',
             templateUrl: 'app/dashboard.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [hero_service_1.HeroService, router_deprecated_1.Router])
     ], DashboardComponent);
     return DashboardComponent;
 }());

@@ -3,18 +3,25 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import {HeroService} from './hero.service'
 import {HeroesComponent} from './heroes.component'
 import {DashboardComponent} from './dashboard.component'
+import {HeroDetailComponent} from './hero-detail.component'
+
 
 @RouteConfig([
   {
   path: '/heroes',
   name: 'Heroes',
   component: HeroesComponent
-  }
+  },
   {
     path: '/dashboard',
     name: 'Dashboard',
     component: DashboardComponent,
     useAsDefault: true
+  },
+  {
+    path: '/detail/:id',
+    name: 'HeroDetail',
+    component: HeroDetailComponent
   }
 ])
 
@@ -28,10 +35,10 @@ import {DashboardComponent} from './dashboard.component'
     </nav>
     <router-outlet></router-outlet>
   `,
+  styleUrls: ['app/app.component.ts'],
   directives: [ROUTER_DIRECTIVES],
   providers: [ROUTER_PROVIDERS, HeroService]
 })
-// https://angular.io/docs/ts/latest/tutorial/toh-pt5.html
 
 export class AppComponent {
   title = 'Tour of Heroes';
